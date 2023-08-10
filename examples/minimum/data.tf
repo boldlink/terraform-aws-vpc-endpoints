@@ -7,10 +7,10 @@ data "aws_vpc" "supporting" {
   }
 }
 
-data "aws_iam_policy_document" "ddb_endpoint_policy" {
+data "aws_iam_policy_document" "s3_endpoint_policy" {
   statement {
     effect    = "Deny"
-    actions   = ["dynamodb:*"]
+    actions   = ["s3:*"]
     resources = ["*"]
 
     principals {
