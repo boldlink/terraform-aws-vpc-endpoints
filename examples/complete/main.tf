@@ -1,4 +1,4 @@
-module "vpc_endpoints" {
+module "comeplete_endpoints_example" {
   source             = "./../../"
   vpc_id             = local.vpc_id
   tags               = var.tags

@@ -5,9 +5,9 @@ module "minimum_vpc_endpoints" {
 
   vpc_endpoints = [
     {
-      service_name      = "com.amazonaws.${local.region}.dynamodb"
+      service_name      = "com.amazonaws.${local.region}.s3"
       vpc_endpoint_type = "Gateway"
-      name              = "DynamoDB"
+      name              = "s3"
       route_table_ids   = flatten(local.route_table_ids)
       policy            = data.aws_iam_policy_document.ddb_endpoint_policy.json
     }
