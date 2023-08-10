@@ -48,9 +48,9 @@ module "minimum_vpc_endpoints" {
 ```
 ## Documentation
 
-[Amazon VPC Endpoint Documentation](https://link)
+[Amazon VPC Endpoint Documentation](https://docs.aws.amazon.com/whitepapers/latest/aws-privatelink/what-are-vpc-endpoints.html)
 
-[Terraform module documentation](https://link)
+[Terraform VPC Endpoint documentation](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/vpc_endpoint.html)
 
 <!-- BEGINNING OF PRE-COMMIT-TERRAFORM DOCS HOOK -->
 ## Requirements
