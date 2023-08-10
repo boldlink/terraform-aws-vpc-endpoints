@@ -30,7 +30,7 @@
 
 | Name | Source | Version |
 |------|--------|---------|
-| <a name="module_vpc_endpoints"></a> [vpc\_endpoints](#module\_vpc\_endpoints) | ./../../ | n/a |
+| <a name="module_comeplete_endpoints_example"></a> [comeplete\_endpoints\_example](#module\_comeplete\_endpoints\_example) | ./../../ | n/a |
 
 ## Resources
 
