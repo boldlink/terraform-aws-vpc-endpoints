@@ -32,7 +32,7 @@ resource "aws_vpc_endpoint" "endpoint" {
   vpc_endpoint_type   = try(var.vpc_endpoints[count.index]["vpc_endpoint_type"], "Interface")
 
   dynamic "dns_options" {
-    for_each = try([var.vpc_endpoints[count.index]["private_dns_enabled"]], [])
+    for_each = try([var.vpc_endpoints[count.index]["dns_options"]], [])
     content {
       dns_record_ip_type                             = try(dns_options.value.dns_record_ip_type, null)
       private_dns_only_for_inbound_resolver_endpoint = try(dns_options.value.private_dns_only_for_inbound_resolver_endpoint, null)
