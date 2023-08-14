@@ -15,7 +15,8 @@
 
 ## Description
 
-The Terraform AWS VPC Endpoint Module is meticulously designed to facilitate the streamlined creation of VPC endpoints within your AWS infrastructure. This module offers a specialized feature that stands out: the ability to automatically generate a dedicated security group for all Interface endpoints when the `create_endpoint_sg` variable is set to `true`.
+The Terraform AWS VPC Endpoint Module is designed to create VPC endpoints on a existing VPC in your AWS infrastructure. 
+This module offers the ability to automatically generate a dedicated security group for all Interface endpoints when the `create_endpoint_sg` variable is set to `true`, we recommend this setting to be set.
 
 ### Advantages of Choosing this Module Over Standalone Resources
 - **Simplicity and Ease of Use:** Designed with user-friendliness in mind, this module provides intuitive and straightforward examples that expedite your adoption process.
