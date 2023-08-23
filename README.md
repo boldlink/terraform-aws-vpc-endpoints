@@ -19,10 +19,9 @@ The Terraform AWS VPC Endpoint Module is designed to create VPC endpoints on a e
 This module offers the ability to automatically generate a dedicated security group for all Interface endpoints when the `create_endpoint_sg` variable is set to `true`, we recommend this setting to be set.
 
 ### Advantages of Choosing this Module Over Standalone Resources
-- **Simplicity and Ease of Use:** Designed with user-friendliness in mind, this module provides intuitive and straightforward examples that expedite your adoption process.
-- **Resource Complexity Management:** This module abstracts away the complexity, enabling you to focus on the core functionality.
-- **Rapid Deployment:** Harness the power of efficient automation – deploying your endpoints becomes a swift, hassle-free task.
-- **Dynamic Endpoint Scalability:** The module's capacity to seamlessly generate multiple endpoints dynamically grants unparalleled flexibility and adaptability to evolving operational needs.
+- This module is easy to use with simplified examples
+- Removes the complexity of managing multiple resources manually
+- Deploys the needed resources faster
 
 Examples available [`here`](./examples)
 
@@ -31,7 +30,8 @@ Examples available [`here`](./examples)
 
 ```hcl
 module "minimum_vpc_endpoints" {
-  source             = "./../../"
+  source             = "boldlink/vpc-endpoints/aws/"
+  version            = 1.0.0
   vpc_id             = local.vpc_id
   tags               = var.tags
 
