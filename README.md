@@ -28,6 +28,7 @@ Examples available [`here`](./examples)
 
 ## Usage
 **NOTE**: These examples use the latest version of this module
+Charges apply. See [here](https://aws.amazon.com/privatelink/pricing/) for more details.
 
 ```hcl
 module "minimum_vpc_endpoints" {
