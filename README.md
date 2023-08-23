@@ -6,7 +6,7 @@
 [![Build Status](https://github.com/boldlink/terraform-aws-vpc-endpoints/actions/workflows/pr-labeler.yaml/badge.svg)](https://github.com/boldlink/terraform-aws-vpc-endpoints/actions)
 [![Build Status](https://github.com/boldlink/terraform-aws-vpc-endpoints/actions/workflows/module-examples-tests.yaml/badge.svg)](https://github.com/boldlink/terraform-aws-vpc-endpoints/actions)
 [![Build Status](https://github.com/boldlink/terraform-aws-vpc-endpoints/actions/workflows/checkov.yaml/badge.svg)](https://github.com/boldlink/terraform-aws-vpc-endpoints/actions)
-[![Build Status](https://github.com/boldlink/terraform-aws-vpc-endpoints/actions/workflows/auto-badge.yaml/badge.svg)](https://github.com/boldlink/terraform-aws-vpc-endpoints/actions)
+[![Build Status](https://github.com/boldlink/terraform-aws-vpc-endpoints/actions/workflows/auto-merge.yaml/badge.svg)](https://github.com/boldlink/terraform-aws-vpc-endpoints/actions)
 
 [<img src="https://avatars.githubusercontent.com/u/25388280?s=200&v=4" width="96"/>](https://boldlink.io)
 
@@ -65,7 +65,7 @@ module "minimum_vpc_endpoints" {
 
 | Name | Version |
 |------|---------|
-| <a name="provider_aws"></a> [aws](#provider\_aws) | 5.12.0 |
+| <a name="provider_aws"></a> [aws](#provider\_aws) | 5.11.0 |
 
 ## Modules
 
