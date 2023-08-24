@@ -27,7 +27,6 @@ resource "aws_vpc_endpoint" "endpoint" {
   private_dns_enabled = try(var.vpc_endpoints[count.index]["private_dns_enabled"], false)
   ip_address_type     = try(var.vpc_endpoints[count.index]["ip_address_type"], null)
   route_table_ids     = try(var.vpc_endpoints[count.index]["route_table_ids"], [])
-  security_group_ids  = (try(var.vpc_endpoints[count.index]["vpc_endpoint_type"], null) == "Interface") ? [aws_security_group.allow_443[0].id] : try(var.vpc_endpoints[count.index]["security_group_ids"], [])
   subnet_ids          = try(var.vpc_endpoints[count.index]["subnet_ids"], [])
   vpc_endpoint_type   = try(var.vpc_endpoints[count.index]["vpc_endpoint_type"], "Interface")
 
@@ -50,4 +49,5 @@ resource "aws_vpc_endpoint" "endpoint" {
     var.tags
   )
 
+  security_group_ids = local.include_security_group[count.index] ? [aws_security_group.allow_443[0].id] : []
 }
