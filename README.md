@@ -33,7 +33,7 @@ Charges apply. See [here](https://aws.amazon.com/privatelink/pricing/) for more 
 ```hcl
 module "minimum_vpc_endpoints" {
   source             = "boldlink/vpc-endpoints/aws/"
-  version            = 1.0.0
+  version            = "<latest_version_nr>"
   vpc_id             = local.vpc_id
   tags               = var.tags
 
@@ -67,7 +67,7 @@ module "minimum_vpc_endpoints" {
 
 | Name | Version |
 |------|---------|
-| <a name="provider_aws"></a> [aws](#provider\_aws) | 5.13.1 |
+| <a name="provider_aws"></a> [aws](#provider\_aws) | 5.11.0 |
 
 ## Modules
 
