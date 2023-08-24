@@ -4,4 +4,3 @@ locals {
     lookup(ep, "vpc_endpoint_type", "Interface") == "Interface" && var.create_endpoint_sg ? true : false
   ]
 }
-
