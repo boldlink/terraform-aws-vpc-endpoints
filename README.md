@@ -11,49 +11,49 @@
 
 [<img src="https://avatars.githubusercontent.com/u/25388280?s=200&v=4" width="96"/>](https://boldlink.io)
 
-# Terraform  module \<PROVIDER>-\<MODULE> Terraform module
 
-## How to use this template -- DELETE THIS SECTION BEFORE PR
-1. Create your new module repository by using terraform only (see SOP) and make sure to use this template.
-2. Add your Terraform code in any branch other than `main/master`
-3. Change the `<REPO_NAME>` value for any badges in the `README.md` files in the root `examples` and `modules` folders.
-4. Add nested modules in the `modules` folder, or `DELETE` the nested folder if not used.
-    * _Note: you will also maintain the nested modules full `README.md` files, remember nested modules can be used on their own._
-5. Add examples in the `examples` folder.
-    * _Note: you can have as many examples as you want, but two are required._
-        * _minimum - this is the example with the minimum code to use the module._
-        * _complete - this is the example with all features for a single module used (the most common use)._
-6. Run `pre-commit run --all-files` to update the `README` and fix any issues.
-    * _Note: make sure your IDE tool uses spaces and not tabs specially on `yaml` files._
-7. Run `checkov` or `terrascan` tool and make sure to add the log to the PR (something to automate).
-    * _Note: make sure to scan your module nested modules and examples (great candidate for a makefile action/script and automation)._
-8. Open a pull request into the default branch (usually `main`) and have it reviewed. don't forget to add the security scan logs.
-    * _Note: make sure to add the nested modules README's to the pre-commit config so they are also updated and validated._
-9. If you have been assigned a reviewer DM the reviewer, or the channel if it has been more than one day.
-10. Post to the channel news of the releases to the teams.
+# Terraform AWS VPC Endpoint Module
 
 ## Description
 
-lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem.
+The Terraform AWS VPC Endpoint Module is designed to create VPC endpoints on a existing VPC in your AWS infrastructure.
+This module offers the ability to automatically generate a dedicated security group for all Interface endpoints when the `create_endpoint_sg` variable is set to `true`, we recommend this setting to be set.
 
-Examples available [`here`]github.com/boldlink/<REPO_NAME>//tree/main/examples)
+### Advantages of Choosing this Module Over Standalone Resources
+- This module is easy to use with simplified examples
+- Removes the complexity of managing multiple resources manually
+- Deploys the needed resources faster
+
+Examples available [`here`](./examples)
 
 ## Usage
-*NOTE*: These examples use the latest version of this module
+**NOTE**: These examples use the latest version of this module
+Charges apply. See [here](https://aws.amazon.com/privatelink/pricing/) for more details.
 
-```console
-module "miniumum" {
-  source  = "boldlink/<module_name>/<provider>"
-  version = "x.x.x"
-  <insert the minimum required variables here if any are required>
-  ...
+```hcl
+module "minimum_vpc_endpoints" {
+  source             = "boldlink/vpc-endpoints/aws/"
+  version            = "<latest_version_nr>"
+  vpc_id             = local.vpc_id
+  tags               = var.tags
+
+  vpc_endpoints = [
+    {
+      service_name        = "com.amazonaws.${local.region}.dynamodb"
+      vpc_endpoint_type   = "Gateway"
+      name                = "DynamoDB"
+      route_table_ids     = flatten(local.route_table_ids)
+      policy              = data.aws_iam_policy_document.ddb_endpoint_policy.json
+    }
+  ]
+}
 }
 ```
 ## Documentation
 
-[<ex. Amazon VPC/Github/Cloudflare> Documentation](https://link)
+[Amazon VPC Endpoint Documentation](https://docs.aws.amazon.com/whitepapers/latest/aws-privatelink/what-are-vpc-endpoints.html)
 
-[Terraform module documentation](https://link)
+[Terraform VPC Endpoint documentation](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/vpc_endpoint.html)
 
 <!-- BEGINNING OF PRE-COMMIT-TERRAFORM DOCS HOOK -->
 ## Requirements
@@ -61,11 +61,13 @@ module "miniumum" {
 | Name | Version |
 |------|---------|
 | <a name="requirement_terraform"></a> [terraform](#requirement\_terraform) | >= 0.14.11 |
-| <a name="requirement_aws"></a> [aws](#requirement\_aws) | >= 4.20.0 |
+| <a name="requirement_aws"></a> [aws](#requirement\_aws) | >= 4.60.0 |
 
 ## Providers
 
-No providers.
+| Name | Version |
+|------|---------|
+| <a name="provider_aws"></a> [aws](#provider\_aws) | 5.13.1 |
 
 ## Modules
 
@@ -73,15 +75,36 @@ No modules.
 
 ## Resources
 
-No resources.
+| Name | Type |
+|------|------|
+| [aws_security_group.allow_443](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/security_group) | resource |
+| [aws_vpc_endpoint.endpoint](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/vpc_endpoint) | resource |
+| [aws_vpc.selected](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/data-sources/vpc) | data source |
 
 ## Inputs
 
-No inputs.
+| Name | Description | Type | Default | Required |
+|------|-------------|------|---------|:--------:|
+| <a name="input_create_endpoint_sg"></a> [create\_endpoint\_sg](#input\_create\_endpoint\_sg) | Specify whether to create Security Group for Interface endpoints | `bool` | `false` | no |
+| <a name="input_tags"></a> [tags](#input\_tags) | A map of tags to assign to the resources | `map(string)` | `{}` | no |
+| <a name="input_timeouts"></a> [timeouts](#input\_timeouts) | Timeouts config for the endpoints | `map(string)` | `{}` | no |
+| <a name="input_vpc_endpoints"></a> [vpc\_endpoints](#input\_vpc\_endpoints) | Configuration lists for vpc endpoints | `any` | `[]` | no |
+| <a name="input_vpc_id"></a> [vpc\_id](#input\_vpc\_id) | The ID of the VPC in which the endpoint will be used. | `string` | n/a | yes |
 
 ## Outputs
 
-No outputs.
+| Name | Description |
+|------|-------------|
+| <a name="output_arn"></a> [arn](#output\_arn) | The Amazon Resource Name (ARN) of the VPC endpoint. |
+| <a name="output_cidr_blocks"></a> [cidr\_blocks](#output\_cidr\_blocks) | The list of CIDR blocks for the exposed AWS service. Applicable for endpoints of type `Gateway`. |
+| <a name="output_dns_entry"></a> [dns\_entry](#output\_dns\_entry) | The DNS entries for the VPC Endpoint. Applicable for endpoints of type `Interface` |
+| <a name="output_id"></a> [id](#output\_id) | The ID of the VPC endpoint |
+| <a name="output_network_interface_ids"></a> [network\_interface\_ids](#output\_network\_interface\_ids) | One or more network interfaces for the VPC Endpoint. Applicable for endpoints of type `Interface`. |
+| <a name="output_owner_id"></a> [owner\_id](#output\_owner\_id) | The ID of the AWS account that owns the VPC endpoint. |
+| <a name="output_prefix_list_id"></a> [prefix\_list\_id](#output\_prefix\_list\_id) | The prefix list ID of the exposed AWS service. Applicable for endpoints of type `Gateway`. |
+| <a name="output_requester_managed"></a> [requester\_managed](#output\_requester\_managed) | Whether or not the VPC Endpoint is being managed by its service - `true` or `false`. |
+| <a name="output_state"></a> [state](#output\_state) | The state of the VPC endpoint. |
+| <a name="output_tags_all"></a> [tags\_all](#output\_tags\_all) | A map of tags assigned to the resource |
 <!-- END OF PRE-COMMIT-TERRAFORM DOCS HOOK -->
 
 ## Third party software
@@ -109,7 +132,7 @@ Any supporting resources will be available on the `tests/supportingResources` an
 Resources on the `tests/supportingResources` folder are not intended for demo or actual implementation purposes, and can be used for reference.
 
 ### Makefile
-The makefile contain in this repo is optimized for linux paths and the main purpose is to execute testing for now.
+The makefile contained in this repo is optimized for linux paths and the main purpose is to execute testing for now.
 * Create all tests stacks including any supporting resources:
 ```console
 make tests
@@ -126,6 +149,4 @@ make cleansupporting
 ```console
 make cleanstatefiles
 ```
-
-
-#### BOLDLink-SIG 2022
+#### BOLDLink-SIG 2023
