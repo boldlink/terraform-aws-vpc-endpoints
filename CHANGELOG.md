@@ -7,6 +7,12 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ## [Unreleased]
 - Include GatewayLoadbalancer type to the complete example
 
+## [1.0.1] - 2023-10-31
+- fix: timeouts block to be more dynamic within the endpoints block
+- feat: showcased usage of auto_accept
+- feat: showcased usage of ip_address_type
+- feat: showcased usage of dns_options
+
 ## [1.0.0] - 2023-08-11
 ### Description
 - feat: First major release

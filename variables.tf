@@ -15,12 +15,6 @@ variable "tags" {
   default     = {}
 }
 
-variable "timeouts" {
-  type        = map(string)
-  description = "Timeouts config for the endpoints"
-  default     = {}
-}
-
 variable "create_endpoint_sg" {
   type        = bool
   description = "Specify whether to create Security Group for Interface endpoints"

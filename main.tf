@@ -31,7 +31,7 @@ resource "aws_vpc_endpoint" "endpoint" {
   vpc_endpoint_type   = try(var.vpc_endpoints[count.index]["vpc_endpoint_type"], "Interface")
 
   dynamic "dns_options" {
-    for_each = try([var.vpc_endpoints[count.index]["dns_options"]], [])
+    for_each = try(var.vpc_endpoints[count.index]["dns_options"], {})
     content {
       dns_record_ip_type                             = try(dns_options.value.dns_record_ip_type, null)
       private_dns_only_for_inbound_resolver_endpoint = try(dns_options.value.private_dns_only_for_inbound_resolver_endpoint, null)
@@ -39,9 +39,9 @@ resource "aws_vpc_endpoint" "endpoint" {
   }
 
   timeouts {
-    create = lookup(var.timeouts, "create", "10m")
-    update = lookup(var.timeouts, "create", "10m")
-    delete = lookup(var.timeouts, "create", "10m")
+    create = try(var.vpc_endpoints[count.index]["timeouts"]["create"], "10m")
+    update = try(var.vpc_endpoints[count.index]["timeouts"]["update"], "10m")
+    delete = try(var.vpc_endpoints[count.index]["timeouts"]["delete"], "10m")
   }
 
   tags = merge(
