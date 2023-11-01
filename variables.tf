@@ -1,3 +1,9 @@
+variable "security_group_name" {
+  type        = string
+  description = "The name to assign to the interfaces security group"
+  default     = null
+}
+
 variable "vpc_endpoints" {
   type        = any
   description = "Configuration lists for vpc endpoints"
@@ -12,12 +18,6 @@ variable "vpc_id" {
 variable "tags" {
   type        = map(string)
   description = "A map of tags to assign to the resources"
-  default     = {}
-}
-
-variable "timeouts" {
-  type        = map(string)
-  description = "Timeouts config for the endpoints"
   default     = {}
 }
 

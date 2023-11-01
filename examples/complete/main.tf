@@ -1,8 +1,9 @@
 module "comeplete_endpoints_example" {
-  source             = "./../../"
-  vpc_id             = local.vpc_id
-  tags               = var.tags
-  create_endpoint_sg = var.create_endpoint_sg
+  source              = "./../../"
+  vpc_id              = local.vpc_id
+  tags                = var.tags
+  create_endpoint_sg  = var.create_endpoint_sg
+  security_group_name = "complete-vpce-endpoint-example"
 
   vpc_endpoints = [
     {
@@ -10,6 +11,21 @@ module "comeplete_endpoints_example" {
       private_dns_enabled = var.private_dns_enabled
       subnet_ids          = local.internal_subnets
       name                = "ssm"
+      auto_accept         = true
+      ip_address_type     = "ipv4"
+
+      dns_options = [
+        {
+          dns_record_ip_type                             = "ipv4"
+          private_dns_only_for_inbound_resolver_endpoint = false
+        }
+      ]
+
+      timeouts = {
+        create = "15m"
+        update = "15m"
+        delete = "15m"
+      }
     },
     {
       service_name        = "${local.reverse_dns_prefix}.${local.region}.ec2messages"
