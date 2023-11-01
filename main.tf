@@ -1,7 +1,7 @@
 ## SG for Interface endpoint
 resource "aws_security_group" "allow_443" {
   count       = length(var.vpc_endpoints) > 0 && var.create_endpoint_sg ? 1 : 0
-  name        = "vpce.interface_endpoint.allow_443"
+  name        = try(var.security_group_name, "vpce.interface_endpoint.allow_443")
   description = "Allow VPC Endpoints SSL/TLS inbound traffic"
   vpc_id      = var.vpc_id
   tags = merge(

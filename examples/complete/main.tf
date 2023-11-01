@@ -1,8 +1,9 @@
 module "comeplete_endpoints_example" {
-  source             = "./../../"
-  vpc_id             = local.vpc_id
-  tags               = var.tags
-  create_endpoint_sg = var.create_endpoint_sg
+  source              = "./../../"
+  vpc_id              = local.vpc_id
+  tags                = var.tags
+  create_endpoint_sg  = var.create_endpoint_sg
+  security_group_name = "complete-vpce-endpoint-example"
 
   vpc_endpoints = [
     {

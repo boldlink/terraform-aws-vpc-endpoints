@@ -1,3 +1,9 @@
+variable "security_group_name" {
+  type        = string
+  description = "The name to assign to the interfaces security group"
+  default     = null
+}
+
 variable "vpc_endpoints" {
   type        = any
   description = "Configuration lists for vpc endpoints"
