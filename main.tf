@@ -38,10 +38,13 @@ resource "aws_vpc_endpoint" "endpoint" {
     }
   }
 
-  timeouts {
-    create = try(var.vpc_endpoints[count.index]["timeouts"]["create"], "10m")
-    update = try(var.vpc_endpoints[count.index]["timeouts"]["update"], "10m")
-    delete = try(var.vpc_endpoints[count.index]["timeouts"]["delete"], "10m")
+  dynamic "timeouts" {
+    for_each = try([var.vpc_endpoints[count.index]["timeouts"]], [])
+    content {
+      create = try(timeouts.value.create, null)
+      update = try(timeouts.value.update, null)
+      delete = try(timeouts.value.delete, null)
+    }
   }
 
   tags = merge(
