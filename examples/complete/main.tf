@@ -1,4 +1,5 @@
 module "comeplete_endpoints_example" {
+  #checkov:skip=CKV2_AWS_5: "Ensure that Security Groups are attached to another resource"
   source              = "./../../"
   vpc_id              = local.vpc_id
   tags                = var.tags
