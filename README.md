@@ -55,6 +55,9 @@ module "minimum_vpc_endpoints" {
 
 [Terraform VPC Endpoint documentation](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/vpc_endpoint.html)
 
+## Checkov Flags
+You may notice a skipped Checkov alert (CKV2_AWS_5) in the complete example of our Terraform module for VPC endpoints. This alert is intentionally skipped as our VPC endpoints are configured to utilize security groups only for specific Interface VPC endpoints. The security group attached is specifically designed to allow SSL/TLS inbound traffic on port 443. We have determined that the attachment of security groups to other resources is not applicable in this context.
+
 <!-- BEGINNING OF PRE-COMMIT-TERRAFORM DOCS HOOK -->
 ## Requirements
 
