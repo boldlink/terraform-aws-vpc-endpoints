@@ -7,6 +7,9 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ## [Unreleased]
 - Include GatewayLoadbalancer type to the complete example
 
+##  [1.0.3] - 2023-04-23
+- fix: CKV2_AWS_5: "Ensure that Security Groups are attached to another resource"
+
 ## [1.0.2] - 2023-11-22
 - fix: timeouts block parsing wrong units when module is used in others modules
 
@@ -26,8 +29,9 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Description
 - feat: Initial code commit
 
-[Unreleased]: https://github.com/boldlink/terraform-aws-vpc-endpoints/compare/1.0.2...HEAD
+[Unreleased]: https://github.com/boldlink/terraform-aws-vpc-endpoints/compare/1.0.3...HEAD
 
+[1.0.3]: https://github.com/boldlink/terraform-aws-vpc-endpoints/releases/tag/1.0.3
 [1.0.2]: https://github.com/boldlink/terraform-aws-vpc-endpoints/releases/tag/1.0.2
 [1.0.1]: https://github.com/boldlink/terraform-aws-vpc-endpoints/releases/tag/1.0.1
 [1.0.0]: https://github.com/boldlink/terraform-aws-vpc-endpoints/releases/tag/1.0.0
